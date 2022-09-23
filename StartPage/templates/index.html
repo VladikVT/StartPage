@@ -1,20 +1,42 @@
 {% load index %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
 		<title>Start Page</title>
+		<link rel="stylesheet" href="static/css/style.css">
 	</head>
 	<body>
-		{% for i in articles %}
-			<h3>{{ i|index:2 }}</h3>
-			{% for j in i|index:forloop.counter0|length|times %}
-				<a href="{{ i|index:0|index:j }}">
-					<div>
-						{{ i|index:1|index:j }}
+		<main>
+			<div id="search">
+				<iframe name="frame" style="display: none;"></iframe>
+				<form onsubmit="search();" target="frame">
+					<div id="search-text-container">
+						<label for="search-text">Yandex: </label>
+						<input id="search-text" name="search-text" type="text" placeholder="Write your question...">
 					</div>
-				</a>
-			{% endfor %}
-		{% endfor %}
+					<div id="search-button-container">
+						<input id="search-button" type="submit" value="Search">
+					</div>
+				</form>
+			</div>
+			<div id="news">
+				<h2>News:</h2>
+				{% for i in articles %}
+					<h3 class="site-name">{{ i|index:2 }}</h3>
+					<div class="article-section">
+						{% for j in i|index:forloop.counter0|length|times %}
+							<a class="article-link" href="{{ i|index:0|index:j }}">
+								<div class="article-plate">
+									{{ i|index:1|index:j }}
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+		</main>
+		<script src="/static/js/script.js"></script>
 	</body>
 </html>
