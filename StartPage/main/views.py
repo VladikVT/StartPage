@@ -4,6 +4,11 @@ import requests as req
 
 # Create your views here.
 def index(request):
+	articles = []
+	articlesCount = 2
+
+	for i in range(articlesCount):
+		pass
 	godot = getArticles(url="https://godotengine.org", nameClass='news-shortitem', nameTag='a', linkClass='news-shortitem', linkTag='a')
 	dtf = getArticles(url="https://dtf.ru/gamedev/entries/new", nameClass='content-title content-title--short l-island-a', nameTag='div', linkClass='content-link', linkTag='a')
 
