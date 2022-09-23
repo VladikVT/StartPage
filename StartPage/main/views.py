@@ -1,20 +1,22 @@
 from django.shortcuts import render
+
+from .models import NewsSite
+
 from bs4 import BeautifulSoup
 import requests as req
 
 # Create your views here.
 def index(request):
-	articles = []
-	articlesCount = 2
+	articles = NewsSite.objects.order_by("id")
+	completeArticles = []
 
-	for i in range(articlesCount):
-		pass
-	godot = getArticles(url="https://godotengine.org", nameClass='news-shortitem', nameTag='a', linkClass='news-shortitem', linkTag='a')
-	dtf = getArticles(url="https://dtf.ru/gamedev/entries/new", nameClass='content-title content-title--short l-island-a', nameTag='div', linkClass='content-link', linkTag='a')
+	for i in articles:
+		a = getArticles(siteName=i.siteName, url=i.url, nameClass=i.nameClass, nameTag=i.nameTag, linkClass=i.linkClass, linkTag=i.linkTag)
+		completeArticles.append(a)
 
-	return render(request, "index.html", {'articlesDTF': dtf, "articlesGodot": godot})
+	return render(request, "index.html", {'articles': completeArticles})
 
-def getArticles(url, nameClass, nameTag, linkClass, linkTag):
+def getArticles(siteName, url, nameClass, nameTag, linkClass, linkTag):
 	resp = req.get(url)
 	soup = BeautifulSoup(resp.text, 'lxml')
 
@@ -28,8 +30,9 @@ def getArticles(url, nameClass, nameTag, linkClass, linkTag):
 	
 	for i in soup.find_all(nameTag, class_=nameClass):
 		articleNames.append(i.text)
-	
+
 	articles.append(articleLinks)
 	articles.append(articleNames)
+	articles.append(siteName)
 
 	return articles
