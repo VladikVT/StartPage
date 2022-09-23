@@ -13,6 +13,10 @@ main {
 	display: table;
 }
 
+#search {
+	margin-bottom: 64px;
+}
+
 #search-text-container {
 	display: inline-block;
 	vertical-align: middle;

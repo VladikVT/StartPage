@@ -5,6 +5,6 @@ let urlExample = "https://yandex.ru/search/?text="
 
 function search() {
 	if (searchText.value != "") {
-    open(urlExample + searchText.value)
+    	open(urlExample + searchText.value)
 	}
 }
