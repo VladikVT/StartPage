@@ -1,0 +1,23 @@
+{% load index %}
+
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Start Page</title>
+	</head>
+	<body>
+		<h3>GodotEngine</h3>
+		{% for i in articlesGodot.0 %}
+			<a href="{{ i }}">
+				<div>{{ articlesGodot.1|index:forloop.counter0 }}</div>
+			</a>
+		{% endfor %}
+
+		<h3>DTF.ru</h3>
+		{% for i in articlesDTF.0 %}
+			<a href="{{ i }}">
+				<div>{{ articlesDTF.1|index:forloop.counter0 }}</div>
+			</a>
+		{% endfor %}
+	</body>
+</html>
