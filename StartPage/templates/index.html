@@ -25,15 +25,25 @@
 		<!-- /\ Search /\ -->
 		<!-- \/ Favorite Sites \/ -->
 			<div id="fav-sites">
-				<h2>Favorite Sites:</h2>
+				<h2 id="fav-sites-text">Favorite Sites:</h2>
+				<button id="fav-sites-button" onclick="addFavSite();">+</button>
 				<div id="fav-site-section">
 				{% for i in favSites %}
 					<a class="fav-site-link" href="{{ i.url }}">
-						<div class="fav-site-plate" style="background-image: url({{i.img}})">
-						</div>
+						<div class="fav-site-plate" style="background-image: url({{i.img}})"> </div>
 					</a>
 				{% endfor %}
 				</div>
+			</div>
+			<div id="add-fav-site-menu">
+				<form action="{% url 'main:addFavSite' %}" method="post">
+					{% csrf_token %}
+					<input type="text" name="siteName">
+					<input type="text" name="url">
+					<input type="text" name="img">
+					<input type="submit" value="Add site">
+					<button id="fav-sites-button" onclick="addFavSite();">X</button>
+				</form>
 			</div>
 		<!-- /\ Favorite Sites /\ -->
 		<!-- \/ News \/ -->
@@ -53,6 +63,7 @@
 				{% endfor %}
 			</div>
 		<!-- /\ News /\ -->
+			<button id="shadow" onclick="addFavSite();"></button>
 		</main>
 		<script src="/static/js/script.js"></script>
 	</body>

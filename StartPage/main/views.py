@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import NewsSite, FavSite
 
@@ -17,6 +19,11 @@ def index(request):
         completeArticles.append(a)
 
     return render(request, "index.html", {'articles': completeArticles, 'favSites': favSites})
+
+def addFavSite(request):
+	fs = FavSite.objects.order_by("id")
+	fs.create(siteName = request.POST.get("siteName", False), url = request.POST.get("url", False), img = request.POST.get("img", False))
+	return HttpResponseRedirect(reverse("main:index"))
 
 def getArticles(siteName, url, nameClass, nameTag, linkClass, linkTag):
 	resp = req.get(url)

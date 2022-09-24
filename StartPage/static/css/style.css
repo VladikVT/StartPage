@@ -13,6 +13,17 @@ main {
 	display: table;
 }
 
+#shadow {
+	display: none;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+
+/* SEARCH */
+
 #search {
 	margin-bottom: 64px;
 }
@@ -60,34 +71,29 @@ main {
 	border-width: 1px;
 }
 
-#news h2 {
+/* SEARCH */
+
+/* FAVORITE SITES */
+
+#fav-sites-text {
 	color: white;
 	text-shadow: 4px 0 4px #000, 
 				0 4px 4px #000, 
 				-4px 0 4px #000, 
 				0 -4px 4px #000;
+	display: inline-block;
+	margin-top: 0;
 }
 
-.article-section {
-	display: grid;
-    max-width: max-content;
-	grid-template-columns: repeat(4, 192px);
-}
-
-.site-name {
+#fav-sites-button {
+	height: 38px;
+	width: 38px;
+	background-color: #000000de;
+	border-radius: 16px;
+	border-color: white;
 	color: white;
-	text-shadow: 4px 0 4px #000, 
-				0 4px 4px #000, 
-				-4px 0 4px #000, 
-				0 -4px 4px #000;
-}
-
-#fav-sites h2 {
-	color: white;
-	text-shadow: 4px 0 4px #000, 
-				0 4px 4px #000, 
-				-4px 0 4px #000, 
-				0 -4px 4px #000;
+	border-width: 1px;
+	float: right;
 }
 
 #fav-site-section {
@@ -113,6 +119,51 @@ main {
 	padding: 16px;
 	height: 128px;
 	border-style: solid;
+	transition: transform .2s;
+	position: relative;
+}
+
+.fav-site-plate:hover {
+	transform: scale(1.05);
+	opacity: 1;
+    z-index: 1 !important;
+}
+
+#add-fav-site-menu {
+	display: none;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	width: 512px;
+	height: 512px;
+	background-color: white;
+	z-index: 2;
+}
+
+/* FAVORITE SITES */
+
+/* NEWS */
+
+#news h2 {
+	color: white;
+	text-shadow: 4px 0 4px #000, 
+				0 4px 4px #000, 
+				-4px 0 4px #000, 
+				0 -4px 4px #000;
+}
+
+.article-section {
+	display: grid;
+    max-width: max-content;
+	grid-template-columns: repeat(4, 192px);
+}
+
+.site-name {
+	color: white;
+	text-shadow: 4px 0 4px #000, 
+				0 4px 4px #000, 
+				-4px 0 4px #000, 
+				0 -4px 4px #000;
 }
 
 .article-link {
@@ -130,4 +181,14 @@ main {
 	height: 128px;
 	text-align: justify;
 	border-style: solid;
+	transition: transform .2s;
+	position: relative;
 }
+
+.article-plate:hover {
+	transform: scale(1.05);
+	background-color: #02000a;
+    z-index: 1 !important;
+}
+
+/* NEWS */
