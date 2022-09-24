@@ -1,20 +1,22 @@
 from django.shortcuts import render
 
-from .models import NewsSite
+from .models import NewsSite, FavSite
 
 from bs4 import BeautifulSoup
 import requests as req
 
 # Create your views here.
 def index(request):
-	articles = NewsSite.objects.order_by("id")
-	completeArticles = []
+    favSites = FavSite.objects.order_by("id")
+    
+    articles = NewsSite.objects.order_by("id")
+    completeArticles = []
 
-	for i in articles:
-		a = getArticles(siteName=i.siteName, url=i.url, nameClass=i.nameClass, nameTag=i.nameTag, linkClass=i.linkClass, linkTag=i.linkTag)
-		completeArticles.append(a)
+    for i in articles:
+        a = getArticles(siteName=i.siteName, url=i.url, nameClass=i.nameClass, nameTag=i.nameTag, linkClass=i.linkClass, linkTag=i.linkTag)
+        completeArticles.append(a)
 
-	return render(request, "index.html", {'articles': completeArticles})
+    return render(request, "index.html", {'articles': completeArticles, 'favSites': favSites})
 
 def getArticles(siteName, url, nameClass, nameTag, linkClass, linkTag):
 	resp = req.get(url)

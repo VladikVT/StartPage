@@ -33,7 +33,7 @@ main {
 }
 
 #search-text {
-	width: 512px;
+	width: 564px;
 	height: 32px;
 	padding-left: 16px;
 	padding-right: 16px;
@@ -52,6 +52,7 @@ main {
 
 #search-button {
 	height: 38px;
+	width: 64px;
 	background-color: #000000de;
 	border-radius: 16px;
 	border-color: white;
@@ -79,6 +80,39 @@ main {
 				0 4px 4px #000, 
 				-4px 0 4px #000, 
 				0 -4px 4px #000;
+}
+
+#fav-sites h2 {
+	color: white;
+	text-shadow: 4px 0 4px #000, 
+				0 4px 4px #000, 
+				-4px 0 4px #000, 
+				0 -4px 4px #000;
+}
+
+#fav-site-section {
+	display: grid;
+    max-width: max-content;
+	grid-template-columns: repeat(4, 192px);
+}
+
+.fav-site-link {
+	text-decoration: none;
+	color: white;
+}
+
+.fav-site-plate {
+    background-size: contain;
+	background-color: #000000cc;
+	background-position: center;
+	opacity: 0.9;
+	border-radius: 16px;
+	border-width: 2px;
+	border-color: rgb(17, 17, 17);
+	margin: 4px;
+	padding: 16px;
+	height: 128px;
+	border-style: solid;
 }
 
 .article-link {

@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		<main>
+		<!-- \/ Search \/ -->
 			<div id="search">
 				<iframe name="frame" style="display: none;"></iframe>
 				<form onsubmit="search();" target="frame">
@@ -21,7 +22,21 @@
 					</div>
 				</form>
 			</div>
-			<hr>
+		<!-- /\ Search /\ -->
+		<!-- \/ Favorite Sites \/ -->
+			<div id="fav-sites">
+				<h2>Favorite Sites:</h2>
+				<div id="fav-site-section">
+				{% for i in favSites %}
+					<a class="fav-site-link" href="{{ i.url }}">
+						<div class="fav-site-plate" style="background-image: url({{i.img}})">
+						</div>
+					</a>
+				{% endfor %}
+				</div>
+			</div>
+		<!-- /\ Favorite Sites /\ -->
+		<!-- \/ News \/ -->
 			<div id="news">
 				<h2>News:</h2>
 				{% for i in articles %}
@@ -37,6 +52,7 @@
 					</div>
 				{% endfor %}
 			</div>
+		<!-- /\ News /\ -->
 		</main>
 		<script src="/static/js/script.js"></script>
 	</body>
