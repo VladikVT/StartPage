@@ -25,6 +25,10 @@ def addFavSite(request):
 	fs.create(siteName = request.POST.get("siteName", False), url = request.POST.get("url", False), img = request.POST.get("img", False))
 	return HttpResponseRedirect(reverse("main:index"))
 
+def delFavSite(request, siteID):
+	FavSite.objects.get(id = siteID).delete()
+	return HttpResponseRedirect(reverse("main:index"))
+
 def getArticles(siteName, url, nameClass, nameTag, linkClass, linkTag):
 	resp = req.get(url)
 	soup = BeautifulSoup(resp.text, 'lxml')

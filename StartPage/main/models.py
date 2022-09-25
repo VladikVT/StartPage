@@ -11,4 +11,4 @@ class NewsSite(models.Model):
 class FavSite(models.Model):
     siteName = models.CharField("Site Name", max_length=50)
     url = models.TextField("Site URL")
-    img = models.TextField("Site Img")
+    img = models.TextField("Site Img", blank=True)

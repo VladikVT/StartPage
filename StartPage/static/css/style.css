@@ -1,10 +1,13 @@
 body {
 	margin: 0;
+
 	background-image: url("/static/img/bg.jpg");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
+
+	font-family: 'Roboto Mono', monospace;
 }
 
 main {
@@ -46,13 +49,13 @@ main {
 #search-text {
 	width: 564px;
 	height: 32px;
-	padding-left: 16px;
-	padding-right: 16px;
+	padding: 0 16px;
 	background-color: #000000de;
 	border-radius: 16px;
 	border-color: white;
 	color: white;
 	border-width: 1px;
+	font-family: 'Roboto Mono', monospace;
 }
 
 #search-button-container {
@@ -62,7 +65,7 @@ main {
 }
 
 #search-button {
-	height: 38px;
+	height: 32px;
 	width: 64px;
 	background-color: #000000de;
 	border-radius: 16px;
@@ -86,19 +89,16 @@ main {
 }
 
 #fav-sites-button {
-	height: 38px;
-	width: 38px;
-	background-color: #000000de;
-	border-radius: 16px;
-	border-color: white;
 	color: white;
-	border-width: 1px;
-	float: right;
+	justify-content: center;
+	align-items: center;
+	height: 112px;
+	font-family: 'Roboto Mono', monospace;
 }
 
 #fav-site-section {
 	display: grid;
-    max-width: max-content;
+	max-width: max-content;
 	grid-template-columns: repeat(4, 192px);
 }
 
@@ -108,25 +108,56 @@ main {
 }
 
 .fav-site-plate {
-    background-size: contain;
+	background-size: contain;
 	background-color: #000000cc;
 	background-position: center;
 	opacity: 0.9;
 	border-radius: 16px;
 	border-width: 2px;
-	border-color: rgb(17, 17, 17);
+	border-style: solid;
+	border-color: rgb(128, 128, 128);
 	margin: 4px;
-	padding: 16px;
-	height: 128px;
+	padding: 8px;
+	height: 92px;
 	border-style: solid;
 	transition: transform .2s;
 	position: relative;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.no-img span {
+	margin: 8px 4px;
 }
 
 .fav-site-plate:hover {
 	transform: scale(1.05);
 	opacity: 1;
-    z-index: 1 !important;
+	z-index: 1 !important;
+	background-color: #000000;
+}
+
+.del-fav-site-button {
+	height: 32px;
+	width: 32px;
+	background-color: #00000086;
+	border-radius: 16px;
+	border-color: rgba(128, 128, 128, 255);
+	color: white;
+	border-width: 2px;
+	border-style: solid;
+	display: none;
+	transition: transform .1s;
+}
+
+.fav-site-plate:hover .del-fav-site-button {
+	display: inline-block;
+}
+
+.del-fav-site-button:hover {
+	transform: scale(1.25);
+	background-color: #000000;
 }
 
 #add-fav-site-menu {
@@ -134,10 +165,72 @@ main {
 	margin: auto;
 	position: absolute;
 	top: 0; left: 0; bottom: 0; right: 0;
-	width: 512px;
-	height: 512px;
+	width: 450px;
+	height: 350px;
 	background-color: white;
 	z-index: 2;
+	background-color: #02000a;
+	border-radius: 16px;
+	border-width: 2px;
+	border-color: rgb(128, 128, 128);
+	border-style: solid;
+	color: white;
+}
+
+#fav-sites-close-button {
+	position: absolute;
+	right: 0;
+	height: 32px;
+	width: 32px;
+	background-color: #000000de;
+	border-radius: 16px;
+	border-color: white;
+	color: white;
+	border-width: 1px;
+	margin: 8px;
+}
+
+#add-fav-site-menu form {
+	width: 100%;
+	height: 100%;
+}
+
+#add-fav-site-menu-form {
+	display: flex;
+	align-items: center;
+	width: initial;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 64px;
+}
+
+.menu-text-field {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 16px;
+	align-items: center;
+}
+
+.menu-text-field input[type="text"] {
+	padding: 2px 16px;
+	background-color: #000000de;
+	border-radius: 16px;
+	border-color: white;
+	color: white;
+	border-width: 1px;
+	font-family: 'Roboto Mono', monospace;
+}
+
+#add-fav-site-menu-form input[type="submit"] {
+	height: 32px;
+	background-color: #000000de;
+	border-radius: 16px;
+	border-color: white;
+	color: white;
+	border-width: 1px;
+	padding: 2px 16px;
 }
 
 /* FAVORITE SITES */
@@ -154,7 +247,7 @@ main {
 
 .article-section {
 	display: grid;
-    max-width: max-content;
+	max-width: max-content;
 	grid-template-columns: repeat(4, 192px);
 }
 
@@ -185,10 +278,19 @@ main {
 	position: relative;
 }
 
+.article-plate div {
+	overflow: hidden;
+	height: inherit;
+}
+
+.article-link:visited .article-plate {
+	border-color: rgb(128, 128, 128);
+}
+
 .article-plate:hover {
 	transform: scale(1.05);
 	background-color: #02000a;
-    z-index: 1 !important;
+	z-index: 1 !important;
 }
 
 /* NEWS */

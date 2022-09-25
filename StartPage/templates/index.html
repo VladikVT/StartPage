@@ -5,6 +5,11 @@
 <html lang='en'>
 	<head>
 		<title>Start Page</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+
 		<link rel="stylesheet" href="static/css/style.css">
 	</head>
 	<body>
@@ -26,23 +31,52 @@
 		<!-- \/ Favorite Sites \/ -->
 			<div id="fav-sites">
 				<h2 id="fav-sites-text">Favorite Sites:</h2>
-				<button id="fav-sites-button" onclick="addFavSite();">+</button>
 				<div id="fav-site-section">
 				{% for i in favSites %}
 					<a class="fav-site-link" href="{{ i.url }}">
-						<div class="fav-site-plate" style="background-image: url({{i.img}})"> </div>
+						{% if i.img != "" %}
+							<div class="fav-site-plate" style="background-image: url({{i.img}})">
+								<form action="{% url 'main:delFavSite' siteID=i.id %}" method="post">
+									{% csrf_token %}
+									<input class="del-fav-site-button" type="submit" value="X">
+								</form>
+							</div>
+						{% else %}
+							<div class="fav-site-plate no-img">
+								<span>{{ i.siteName }}</span>
+								<form action="{% url 'main:delFavSite' siteID=i.id %}" method="post">
+									{% csrf_token %}
+									<input class="del-fav-site-button" type="submit" value="X">
+								</form>
+							</div>
+						{% endif %}
 					</a>
 				{% endfor %}
+				<button id="fav-sites-button" class="fav-site-plate" onclick="addFavSite();">Add Site +</button>
 				</div>
 			</div>
 			<div id="add-fav-site-menu">
+				<button id="fav-sites-close-button" onclick="addFavSite();">X</button>
 				<form action="{% url 'main:addFavSite' %}" method="post">
 					{% csrf_token %}
-					<input type="text" name="siteName">
-					<input type="text" name="url">
-					<input type="text" name="img">
-					<input type="submit" value="Add site">
-					<button id="fav-sites-button" onclick="addFavSite();">X</button>
+					<div id="add-fav-site-menu-form">
+						<h3>Add site:</h3>
+						<div class="menu-text-field">
+							<label for="siteName">Site Name*: </label>
+							<input type="text" name="siteName" required>
+						</div>
+						<div class="menu-text-field">
+							<label for="url">Site URL*: </label>
+							<input type="text" name="url" required>
+						</div>
+						<div class="menu-text-field">
+							<label for="img">Site IMG: </label>
+							<input type="text" name="img">
+						</div>
+						<div>
+							<input type="submit" value="Add site">
+						</div>
+					</div>
 				</form>
 			</div>
 		<!-- /\ Favorite Sites /\ -->
@@ -55,7 +89,7 @@
 						{% for j in i|index:forloop.counter0|length|times %}
 							<a class="article-link" href="{{ i|index:0|index:j }}">
 								<div class="article-plate">
-									{{ i|index:1|index:j }}
+									<div>{{ i|index:1|index:j }}</div>
 								</div>
 							</a>
 						{% endfor %}
