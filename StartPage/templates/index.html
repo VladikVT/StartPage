@@ -17,7 +17,7 @@
 		<!-- \/ Search \/ -->
 			<div id="search">
 				<iframe name="frame" style="display: none;"></iframe>
-				<form onsubmit="search();" target="frame">
+				<form onsubmit="search();" target="frame" autocomplete="off">
 					<div id="search-text-container">
 						<label for="search-text">Yandex: </label>
 						<input id="search-text" name="search-text" type="text" placeholder="Write your question...">
@@ -57,7 +57,7 @@
 			</div>
 			<div id="add-fav-site-menu">
 				<button id="fav-sites-close-button" onclick="addFavSite();">X</button>
-				<form action="{% url 'main:addFavSite' %}" method="post">
+				<form action="{% url 'main:addFavSite' %}" method="post" autocomplete="off">
 					{% csrf_token %}
 					<div id="add-fav-site-menu-form">
 						<h3>Add site:</h3>
