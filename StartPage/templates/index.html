@@ -55,11 +55,11 @@
 				<button id="fav-sites-button" class="fav-site-plate" onclick="addFavSite();">Add Site +</button>
 				</div>
 			</div>
-			<div id="add-fav-site-menu">
+			<div class="add-menu" id="add-fav-sites-menu">
 				<button id="fav-sites-close-button" onclick="addFavSite();">X</button>
 				<form action="{% url 'main:addFavSite' %}" method="post" autocomplete="off">
 					{% csrf_token %}
-					<div id="add-fav-site-menu-form">
+					<div class="add-menu-form">
 						<h3>Add site:</h3>
 						<div class="menu-text-field">
 							<label for="siteName">Site Name*: </label>
@@ -73,6 +73,10 @@
 							<label for="img">Site IMG: </label>
 							<input type="text" name="img">
 						</div>
+						<div class="menu-text-field">
+							<label for="priority">Site priority: </label>
+							<input type="number" step="1" name="priority">
+						</div>
 						<div>
 							<input type="submit" value="Add site">
 						</div>
@@ -83,8 +87,15 @@
 		<!-- \/ News \/ -->
 			<div id="news">
 				<h2>News:</h2>
+				<div class="article-section">
+					<button id="fav-sites-button" class="fav-site-plate" onclick="addNewsSite();">Add News Site +</button>
+				</div>
 				{% for i in articles %}
 					<h3 class="site-name">{{ i|index:2 }}</h3>
+					<form action="{% url 'main:delNewsSite' siteName=i|index:2 %}" method="post">
+						{% csrf_token %}
+						<input class="del-news-site-button" type="submit" value="X">
+					</form>
 					<div class="article-section">
 						{% for j in i|index:forloop.counter0|length|times %}
 							<a class="article-link" href="{{ i|index:0|index:j }}">
@@ -96,8 +107,45 @@
 					</div>
 				{% endfor %}
 			</div>
+			<div class="add-menu" id="add-news-sites-menu">
+				<button id="fav-sites-close-button" onclick="addNewsSite();">X</button>
+				<form action="{% url 'main:addNewsSite' %}" method="post" autocomplete="off">
+					{% csrf_token %}
+					<div class="add-menu-form">
+						<h3>Add news site:</h3>
+						<div class="menu-text-field">
+							<label for="siteName">Site Name*: </label>
+							<input type="text" name="siteName" required>
+						</div>
+						<div class="menu-text-field">
+							<label for="url">Site URL*: </label>
+							<input type="text" name="url" required>
+						</div>
+						<div class="menu-text-field">
+							<label for="nameClass">Name class*: </label>
+							<input type="text" name="nameClass">
+						</div>
+						<div class="menu-text-field">
+							<label for="nameTag">Name tag*: </label>
+							<input type="text" name="nameTag">
+						</div>
+						<div class="menu-text-field">
+							<label for="linkClass">link class*: </label>
+							<input type="text" name="linkClass">
+						</div>
+						<div class="menu-text-field">
+							<label for="linkTag">link tag*: </label>
+							<input type="text" name="linkTag">
+						</div>
+						<div>
+							<input type="submit" value="Add site">
+						</div>
+					</div>
+				</form>
+			</div>
 		<!-- /\ News /\ -->
-			<button id="shadow" onclick="addFavSite();"></button>
+			<button id="shadow-afs" onclick="addFavSite();"></button>
+			<button id="shadow-ans" onclick="addNewsSite();"></button>
 		</main>
 		<script src="/static/js/script.js"></script>
 	</body>
