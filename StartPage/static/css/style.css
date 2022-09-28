@@ -19,7 +19,7 @@ main {
 #shadow-afs {
 	display: none;
 	background-color: rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0; left: 0; bottom: 0; right: 0;
@@ -28,7 +28,7 @@ main {
 #shadow-ans {
 	display: none;
 	background-color: rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0; left: 0; bottom: 0; right: 0;
@@ -108,7 +108,7 @@ main {
 #fav-site-section {
 	display: grid;
 	max-width: max-content;
-	grid-template-columns: repeat(4, 192px);
+	grid-template-columns: repeat(5, 156px);
 }
 
 .fav-site-link {
@@ -127,7 +127,7 @@ main {
 	border-color: rgb(128, 128, 128);
 	margin: 4px;
 	padding: 8px;
-	height: 92px;
+	height: 80px;
 	border-style: solid;
 	transition: transform .2s;
 	position: relative;
@@ -172,7 +172,7 @@ main {
 .add-menu {
 	display: none;
 	margin: auto;
-	position: absolute;
+	position: fixed;
 	top: 0; left: 0; bottom: 0; right: 0;
 	width: 450px;
 	height: 400px;
