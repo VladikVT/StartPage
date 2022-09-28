@@ -2,27 +2,29 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import NewsSite, FavSite
+from .models import NewsSite, FavSite, Settings
 
 from bs4 import BeautifulSoup
 import requests as req
 
 # Create your views here.
 def index(request):
-    favSites = FavSite.objects.order_by("-priority")
-    
-    articles = NewsSite.objects.order_by("-priority")
-    completeArticles = []
+	settings = Settings.objects.get(id = 1)
 
-    for i in articles:
-        a = getArticles(siteName=i.siteName, url=i.url, 
+	favSites = FavSite.objects.order_by("-priority")
+	
+	articles = NewsSite.objects.order_by("-priority")
+	completeArticles = []
+
+	for i in articles:
+		a = getArticles(siteName=i.siteName, url=i.url, 
 						nameClass=i.nameClass, 
 						nameTag=i.nameTag, 
 						linkClass=i.linkClass, 
 						linkTag=i.linkTag)
-        completeArticles.append(a)
+		completeArticles.append(a)
 
-    return render(request, "index.html", {'articles': completeArticles, 'favSites': favSites})
+	return render(request, "index.html", {'articles': completeArticles, 'favSites': favSites, 'settings': settings})
 
 def addFavSite(request):
 	fs = FavSite.objects.order_by("id")
@@ -49,6 +51,15 @@ def addNewsSite(request):
 
 def delNewsSite(request, siteName):
 	NewsSite.objects.get(siteName = siteName).delete()
+	return HttpResponseRedirect(reverse("main:index"))
+
+def updateSettings(request):
+	settings = Settings.objects.get(id = 1)
+
+	settings.bgURL = request.POST.get("bgURL", False)
+
+	settings.save()
+
 	return HttpResponseRedirect(reverse("main:index"))
 
 def getArticles(siteName, url, nameClass, nameTag, linkClass, linkTag):

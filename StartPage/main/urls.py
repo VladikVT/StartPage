@@ -9,5 +9,6 @@ urlpatterns = [
 	path('add_fav_site', views.addFavSite, name = 'addFavSite'),
 	path('<int:siteID>/del_fav_site', views.delFavSite, name = 'delFavSite'),
 	path('add_news_site', views.addNewsSite, name = 'addNewsSite'),
-	path('<str:siteName>/del_news_site', views.delNewsSite, name = 'delNewsSite')
+	path('<str:siteName>/del_news_site', views.delNewsSite, name = 'delNewsSite'),
+	path('update_settings', views.updateSettings, name = 'updateSettings')
 ]

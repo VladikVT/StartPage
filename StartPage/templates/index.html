@@ -10,10 +10,36 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 
+		<script src="https://kit.fontawesome.com/8d02cb8639.js" crossorigin="anonymous"></script>
+
 		<link rel="stylesheet" href="static/css/style.css">
+		<style type="text/css">
+			body {
+				background-image: url("{{ settings.bgURL }}");
+			}
+		</style>
 	</head>
 	<body>
 		<main>
+		<!-- \/ Settings \/ -->
+			<button id="settings-button" onclick="viewSettings();"><i class="fa-solid fa-gear"></i></button>
+			<div class="menu" id="settings-menu">
+				<button id="fav-sites-close-button" onclick="viewSettings();"><i class="fa-solid fa-xmark"></i></button>
+				<form action="{% url 'main:updateSettings' %}" method="post" autocomplete="off">
+					{% csrf_token %}
+					<div class="menu-form">
+						<h3>Settings:</h3>
+						<div class="menu-text-field">
+							<label for="bgURL">BackGround image URL: </label>
+							<input type="text" name="bgURL" value="">
+						</div>
+						<div>
+							<input type="submit" value="Apply">
+						</div>
+					</div>
+				</form>
+			</div>
+		<!-- /\ Settings /\ -->
 		<!-- \/ Search \/ -->
 			<div id="search">
 				<iframe name="frame" style="display: none;"></iframe>
@@ -38,7 +64,7 @@
 							<div class="fav-site-plate" style="background-image: url({{i.img}})">
 								<form action="{% url 'main:delFavSite' siteID=i.id %}" method="post">
 									{% csrf_token %}
-									<input class="del-fav-site-button" type="submit" value="X">
+									<button class="del-fav-site-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
 								</form>
 							</div>
 						{% else %}
@@ -46,7 +72,7 @@
 								<span>{{ i.siteName }}</span>
 								<form action="{% url 'main:delFavSite' siteID=i.id %}" method="post">
 									{% csrf_token %}
-									<input class="del-fav-site-button" type="submit" value="X">
+									<button class="del-fav-site-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
 								</form>
 							</div>
 						{% endif %}
@@ -55,11 +81,11 @@
 				<button id="fav-sites-button" class="fav-site-plate" onclick="addFavSite();">Add Site +</button>
 				</div>
 			</div>
-			<div class="add-menu" id="add-fav-sites-menu">
-				<button id="fav-sites-close-button" onclick="addFavSite();">X</button>
+			<div class="menu" id="add-fav-sites-menu">
+				<button id="fav-sites-close-button" onclick="addFavSite();"><i class="fa-solid fa-xmark"></i></button>
 				<form action="{% url 'main:addFavSite' %}" method="post" autocomplete="off">
 					{% csrf_token %}
-					<div class="add-menu-form">
+					<div class="menu-form">
 						<h3>Add site:</h3>
 						<div class="menu-text-field">
 							<label for="siteName">Site Name*: </label>
@@ -94,7 +120,7 @@
 					<h3 class="site-name">{{ i|index:2 }}</h3>
 					<form action="{% url 'main:delNewsSite' siteName=i|index:2 %}" method="post">
 						{% csrf_token %}
-						<input class="del-news-site-button" type="submit" value="X">
+						<button class="del-news-site-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
 					</form>
 					<div class="article-section">
 						{% for j in i|index:forloop.counter0|length|times %}
@@ -107,11 +133,11 @@
 					</div>
 				{% endfor %}
 			</div>
-			<div class="add-menu" id="add-news-sites-menu">
-				<button id="fav-sites-close-button" onclick="addNewsSite();">X</button>
+			<div class="menu" id="add-news-sites-menu">
+				<button id="fav-sites-close-button" onclick="addNewsSite();"><i class="fa-solid fa-xmark"></i></button>
 				<form action="{% url 'main:addNewsSite' %}" method="post" autocomplete="off">
 					{% csrf_token %}
-					<div class="add-menu-form">
+					<div class="menu-form">
 						<h3>Add news site:</h3>
 						<div class="menu-text-field">
 							<label for="siteName">Site Name*: </label>
@@ -150,6 +176,7 @@
 		<!-- /\ News /\ -->
 			<button id="shadow-afs" onclick="addFavSite();"></button>
 			<button id="shadow-ans" onclick="addNewsSite();"></button>
+			<button id="shadow-s" onclick="viewSettings();"></button>
 		</main>
 		<script src="/static/js/script.js"></script>
 	</body>

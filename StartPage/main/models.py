@@ -14,3 +14,6 @@ class FavSite(models.Model):
 	url = models.TextField("Site URL")
 	img = models.TextField("Site Img", blank=True)
 	priority = models.IntegerField("Site Priority", default=0, blank=True)
+
+class Settings(models.Model):
+	bgURL = models.TextField("BackGround URL", blank=True)
